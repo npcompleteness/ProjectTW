@@ -8,6 +8,7 @@ Take a look in Google Slide : https://drive.google.com/open?id=1BFyGXq3kRpMkBLYj
 ### Prerequisites
 
 Tested operative systems: Ubuntu Linux 16.04
+Python v2.7.12
 DBMS Server: MongoDB (v3.6.5) running on localhost with port 27017
 
 ### Installing
@@ -22,6 +23,8 @@ Install requirements and clone this repository on your system:
 
 ```
 pip install -r requirements.txt
+pip install bson
+pip install pymongo==3.6.1
 git clone https://github.com/npcompleteness/ProjectTW.git
 cd ProjectTW
 ```
