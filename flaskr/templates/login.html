@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>BestMatching | Login</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='assets/images/icon.png')}}"/>
+
+        <link href="{{url_for('static',filename='assets/css/login.css')}}" rel="stylesheet">
+
+
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>	   
+    	{% extends "layout.html" %}
+        {% block body %} 
+				<form class="login-form" method="post" action="/login">
+				  <p class="login-text">
+				    <span class="fa-stack fa-lg">
+				      <i class="fa fa-circle fa-stack-2x"></i>
+				      <i class="fa fa-lock fa-stack-1x"></i>
+				    </span>
+				  </p>
+				  <input type="email" class="login-username" autofocus="true" name="email1" required="true" placeholder="Email" />
+				  <input type="password" class="login-password" required="true" name="psw1" placeholder="Password" />
+				  <input type="submit" name="Login" value="Login" class="login-submit" />
+				</form>
+				<a href="#" class="login-forgot-pass">forgot password?</a>
+				<div class="underlay-photo"></div>
+				<div class="underlay-black"></div> 		
+		{% endblock %}	
+	</body>
+</html>	

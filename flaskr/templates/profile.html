@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>BestMatching | Profile</title>
+        <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static',filename='assets/images/icon.png')}}"/>
+
+
+
+        <link href="{{url_for('static',filename='assets/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{url_for('static',filename='assets/css/bootstrap-theme.min.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static',filename='assets/css/owl.carousel.css')}}" rel="stylesheet">
+        <link href="{{url_for('static',filename='assets/css/owl.theme.default.min.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static',filename='assets/css/magnific-popup.css')}}" rel="stylesheet">
+
+        <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet">
+        <link href="{{url_for('static',filename='assets/css/table.css')}}" rel="stylesheet">
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        {% extends "layout.html" %}
+        {% block body %}
+    
+        <div id="menu-item" class="menu-item hide-menu">
+            <div class="container">
+                <ul>
+                    <a href="{{url_for('show')}}"><li>Home</li></a>
+                    <a href="#mieiprogetti"><li>Miei Progetti</li></a>
+                    <a href="#progetti"><li>Progetti</li></a>
+                    <a href="#matching"><li>Matching</li></a>
+                    <a href="#support"><li>Supporto</li></a>
+                    <a href="">
+                        <li>
+                            <form method="post" action="/logout" >
+                                <button class="btn ubutia-btn" name="logout1" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <div class="main">
+            <header class="bg-img header1">
+                <nav class="navbar navbar-default navbar-ubutia">
+                    <div class="container">
+                        <div class="navigation-bar">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="logo">
+                                        <a href="profile.html"><img src="{{url_for('static',filename='assets/images/logo1.png')}}"/></a>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <div class="menu m">
+                                        <a href="#"><span class="ion-navicon _ion-android-menu"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                
+                <section class="about section">
+                            <div class="container">
+                                <h2 class="title">Miei Progetti</h2>
+                                    
+                            </div>
+                                <div class="col-md-12">
+                                    <div id="mieiprogetti">
+                                        <div class="table-responsive">
+                                            <table>
+                                              <tbody id="tbodymiei">
+                                               
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+        </header>
+
+                 <section class="purpose section">
+                            <div class="container">
+                                <h2 class="title">Progetti</h2>
+                                <button id="myButton" class="btn ubutia-btn">Crea un Progetto</button>
+                                    <div id="id01" class="modal">
+                                    <form id="form1" class="modal-content animate" action="create_proj'" method="post" OnSubmit="return checkInp()">
+                                    <div class="imgcontainer">
+                                         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                                     </div>
+                                            <div id="divLabel">
+
+                                            </div>
+                                            <div class="row">
+                                                <button id="addField" class="btn ubutia-btn"  type="button">Aggiungi Campo</button>
+                                                <button id="invia" class="btn ubutia-btn" type="submit">Submit</button>
+                                                <button class="btn ubutia-btn" type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                                            </div>
+                                     </div>
+                                     </form>
+                                <div class="col-md-12">
+                                    <div id="progetti">
+                                        <div class="table-responsive">
+                                            <table>
+                                              <tbody id="tbody">
+
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </section>
+                <section class="about section">
+                    <header class ="bg-img header1">
+                            <div class="container">
+                                <br>
+                                <br>
+                                <br>
+                                <h2 class="title">Matching</h2>
+                                <div class="col-md-12">
+                                    <div id="matching">
+                                        <div class="table-responsive">
+                                            <table>
+                                              <tbody id="tbodymatch">
+
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </header>
+                </section>
+                <section id="support" class="contact section">
+                <div class="container">
+                     <h2 class="title">Supporto</h2>
+                    <div class="row">
+                            <div class="col-sm-12">
+                            <div class="ubutia-card">
+                                <div class="ubutia-card-header">
+                                        <span class="fa fa-paper-plane" aria-hidden="true"></span>
+                                </div>
+                                <div class="ubutia-card-content">
+                                     <h3>Per ricevere assistenza invia un email al nostro team di supporto.</h3>
+                                    <p>dimarinoa55@gmail.com
+                                       vincenzo.scarrica@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+        <script src="{{url_for('static',filename='assets/js/jquery-3.1.1.js')}}"></script>
+        <script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
+        <script src="{{url_for('static',filename='assets/js/owl.carousel.min.js')}}"></script>
+        <script src="{{url_for('static',filename='assets/js/jquery.magnific-popup.js')}}"></script>
+        <script src="{{url_for('static',filename='assets/js/script.js')}}"></script>
+
+        <script src="{{url_for('static',filename='assets/js/scriptprofile.js')}}"> </script>  
+	<script>
+		var t;
+		$(document).ready(function() {
+		    t=1;
+		    $.each(JSON.parse('{{lista_proj}}'), function(i,record) {
+		            $('#tbody').append("<tr class=\"col-md-8\" id=\"tt"+t.toString()+"\"></tr>");
+		            $('#tt'+t.toString()).append("<td><strong>"+record.nome+"</strong></td><td>"+record.email+"</td><td>"+record.desc+"</td><td><button class=\"btn btn-primary\" onclick=\"javascript:iscrizione('"+(record.nome)+"');\" >Agree!</button></td><td>"+record.campo1+"</td>");
+		            for(j=2 ;j<=(Object.keys(record).length-5); j++) {
+		                    $('#tt'+t.toString()).append("<td>"+record["campo"+j.toString()]+"</td>");
+		            }
+		            t++;
+		    });
+		t=1;
+		    $.each(JSON.parse('{{lista_miei}}'), function(i,record) {
+		            $('#tbodymiei').append("<tr class=\"col-md-8\" id=\""+t.toString()+"\"></tr>");
+		            $('#'+t.toString()).append("<td><strong>"+record.nome+"</strong></td><td>"+record.email+"</td><td>"+record.desc+"</td><td>"+record.campo1+"</td>");
+		            for(j=2 ;j<=(Object.keys(record).length-5); j++) {
+		                    $('#'+t.toString()).append("<td>"+record["campo"+j.toString()]+"</td>");
+		            }
+		            t++;
+		    });
+		t=1;
+		   $.each(JSON.parse('{{lista_risultati}}'), function(i,record) {
+			$('#tbodymatch').append("<tr class=\"col-md-8\" id=\"ttt"+t.toString()+"\"></tr>");
+			$('#ttt'+t.toString()).append("<td><strong>"+record.nome+"</strong></td><td>"+record.email+"</td>");
+			for(var x in record) {				
+				if(x != "nome" && x != "email" && x != "_id") $('#ttt'+t.toString()).append("<td><strong>"+"task:</strong>"+x+" <strong>offerente:</strong>"+record[x][0]+" <strong>offerta:</strong>"+record[x][1]+"</td>");
+			}
+			t++
+		   });
+		});
+		function iscrizione(name) {
+			$('#form1').attr('action','/iscr');
+			document.getElementById('addField').style.display = 'none';
+			$('#divLabel').html("");
+			$.each(JSON.parse('{{lista_proj}}'), function(i, record) {
+				if(record.nome == name) {
+					$('#divLabel').append("<textarea name=\"nome\" readonly >" +record.nome+"</textarea><textarea name=\"emailproj\" readonly>"+record.email+"</textarea>");
+					for(j=1;j<=Object.keys(record).length-5;j++) {
+						$('#divLabel').append("<label for=\"uname\"><b><strong>"+record["campo"+j.toString()]+"</strong></b></label><input type=\"text\" placeholder=\"Scrivere l' offerta in euro\" name="+record["campo"+j.toString()]+" required>");
+					}
+				}
+			});
+			document.getElementById('id01').style.display = 'block';
+		}
+	</script>
+        {% endblock %} 
+    </body>
