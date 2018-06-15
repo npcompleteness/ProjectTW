@@ -1,0 +1,133 @@
+$('#invia').click(function(checkInp){
+
+});
+
+function checkInp()
+{
+var y = document.getElementById('anno').value;
+    m = document.getElementById('mese').value;
+    d = document.getElementById('giorno').value;
+    da = new Date();
+    yt = da.getFullYear();
+    mt = da.getMonth();
+    dt = da.getDate();
+    newdate = new Date(yt, mt-1, dt);
+var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+
+if((!(y % 4) && y % 100) || !(y % 400)){
+    daysInMonth[1] = 29;
+}
+
+if(!(/\D/.test(String(d))) && d > 0 && d<= daysInMonth[--m])
+{
+    date = new Date(y, m-1, d);
+    if(date > newdate)
+    {
+        return true;
+    }
+    else
+    {
+        alert('Data Non Valida');
+        return false;
+    }
+}
+else
+
+    return false;
+};
+
+
+
+var j;
+var cont;
+$('#addField').click(function() {
+$('#divLabel').append("<div class=\"container col\"><label id=\"field"+cont+"\" for=\"uname\"><b>Campo #"+cont+"</b></label> <input type=\"uname\" placeholder=\"Inserisci campo aggiuntivo\" name=\"campo"+cont+"\"required></div>");
+cont++;
+});
+$('#myButton').click( function() {
+cont = 2;
+document.getElementById('id01').style.display='block';
+document.getElementById('addField').style.display='block';  
+$('#form1').attr('action','/create_proj');
+$('#divLabel').html("");
+$('#divLabel').append("<div class=\"container col\"><label for=\"uname\"><b>Nome Progetto</b></label><input type=\"text\" placeholder=\"nome\" name=\"nome\" required></div>");
+$('#divLabel').append("<div class=\"container col\"><label for=\"uname\"><b>Descrizione</b></label><input type=\"text\" placeholder=\"inserisci Descrizione\" name=\"desc\" required></div>");
+$('#divLabel').append("<div class=\"container col\"><label for=\"uname\"><b>Anno scadenza</b></label><input id=\"anno\" type=\"number\"placeholder=\"Inserisci anno\" name=\"anno_scadenza\" required></div>");
+$('#divLabel').append("<div class=\"container col\"><label for=\"uname\"><b>Mese scadenza</b></label><input id=\"mese\" type=\"number\" min=\"1\" max=\"12\"placeholder=\"Inserisci mese\" name=\"mese_scadenza\" required></div>");
+$('#divLabel').append("<div class=\"container col\"><label for=\"uname\"><b>Giorno scadenza</b></label><input id=\"giorno\" type=\"number\"min=\"1\" max=\"31\" placeholder=\"Inserisci giorno\" name=\"giorno_scadenza\" required></div>");
+$('#divLabel').append("<div class=\"container col\"><label for=\"uname\"><b>Campo #1</b></label><input type=\"text\" placeholder=\"Inserisci Campo\" name=\"campo1\" required></div></div>");
+
+});
+
+
+
+function iscrizione(name) {
+    $('#form1').attr('action','/iscr');
+    document.getElementById('addField').style.display = 'none';
+    $('#divLabel').html("");
+    
+
+        $.each(JSON.parse('{{lista_proj}}'), function(i, record){
+            if(record.nome == name) {
+            $('#divLabel').append("<textarea name=\"nome\" readonly >"+record.nome+"</textarea><textarea name=\"emailproj\" readonly>"+record.email+"</textarea>");
+                for(j=1; j <= Object.keys(record).length-5; j++) {
+                    $('#divLabel').append("<label for=\"uname\"><b>"+record["campo"+j.toString()]+"</b></label><input type=\"text\" placeholder=\"Scrivere offerta in euro\" name="+record["campo"+j.toString()]+" required>");
+            }
+            }
+        });
+    document.getElementById('id01').style.display = 'block';
+
+}
+$('#invia').click(function checkField()
+{
+	var field;
+	var field2;
+	for(var i=1; i<cont; i++)
+	{
+		field = document.getElementById('field'+i.toString()).value;
+		for(var j=i+1; j<=cont; j++)
+		{
+			field2= document.getElementById('field'+j.toString()).value;
+			if(field == field2)
+			{
+				alert("Hai inserito due Campi con lo stesso valore");
+	          		document.getElementById('id01').style.display = 'none';
+				return false;
+			}
+		}		
+	}
+
+	return true;
+	cont=2;
+});
+var t;
+$(document).ready(function() {
+    t=1;
+    $.each(JSON.parse('{{lista_proj}}'), function(i,record) {
+            $('#tbody').append("<tr class=\"col-md-8\" id=\""+t.toString()+"|"+"\"></tr>");
+            $('#'+t.toString()+'|').append("<td>"+record.nome+"</td><td>"+record.email+"</td><td>"+record.desc+"</td><td>"+record.scadenza+"</td><td><button class=\"btn btn-primary\"  onclick=\"javascript:iscrizione('"+(record.nome)+"');\" >Agree!</button></td><td>"+record.campo1+"</td>");
+            for(j=2 ;j<=(Object.keys(record).length-5); j++) {
+                    $('#'+t.toString()+'|').append("<td>"+record["campo"+j.toString()]+"</td>");
+            }
+            t++;
+    });
+    t=1;
+    $.each(JSON.parse('{{lista_miei}}'), function(i,record) {
+            $('#tbodymiei').append("<tr class=\"col-md-8\" id=\""+t.toString()+"\"></tr>");
+            $('#'+t.toString()).append("<td>"+record.nome+"</td><td>"+record.email+"</td><td>"+record.desc+"</td><td>"+record.scadenza+"</td><td>"+record.campo1+"</td>");
+            for(j=2 ;j<=(Object.keys(record).length-5); j++) {
+                    $('#'+t.toString()).append("<td>"+record["campo"+j.toString()]+"</td>");
+            }
+            t++;
+    });
+    t=1;
+    $.each(JSON.parse('{{lista_risultati}}'), function(i,record) {
+            $('#tbodymatch').append("<tr class=\"col-md-8\" id=\""+t.toString()+"||"+"\"></tr>");
+            $('#'+t.toString()+'||').append("<td>"+record.nome+"</td><td>"+record.email+"</td>");
+            for(var x in Object.keys(record)) {
+                    if(x != "nome" && x != "email" && x != "_id") $('#'+t.toString()+'||').append("<td>"+"task:"+x+" offerente:"+record[x][0]+" offerta:"+record[x][1]+"</td>");
+            }
+            t++;
+    });
+});
