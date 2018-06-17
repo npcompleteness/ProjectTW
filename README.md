@@ -52,12 +52,6 @@ sudo python server.py
 ```
 Now the project is running on localhost, port 5000 (if you set Security Groups on for HTTP, you can choose port 80).
 
-# Testing the algorithm
-
-* Create n-documents in "iscr" collection with {name,email,emailproj,(namecampo1),(namecampo2)...(namecampo-n)} -> they will have the same namecampo-i, with decimal value
-* Create a project in "proj" collection with {name,email,desc,scadenza (an ISODate),campo1,campo2,..campo-n} -> all the values of campo-i are the same fieldname of nomecampo-i and email is equal to emailproj
-* In profile page of user with emailproj will appear (underneath 'Matching') the result of n-task n-agents algorithm
-
 # Future releases
 
 * A newsletter
