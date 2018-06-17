@@ -10,6 +10,7 @@ The project contains: a web server to get running through Python Flask, a little
 * Tested operative systems: Ubuntu Linux 16.04
 * Python v2.7.12
 * DBMS Server: MongoDB (v3.6.5) running on localhost with port 27017
+* A DB named "progettotw" with collection "user","proj","iscr","risultati"
 * WiFi or LTE connection, because the project keeps some Bootstrap libraries (online)
 
 ### Installing
@@ -50,6 +51,12 @@ Save and exit, then
 sudo python server.py
 ```
 Now the project is running on localhost, port 5000 (if you set Security Groups on for HTTP, you can choose port 80).
+
+# Testing the algorithm
+
+* Create n-documents in "iscr" collection with {name,email,emailproj,(namecampo1),(namecampo2)...(namecampo-n)} -> they will have the same namecampo-i, with decimal value
+* Create a project in "proj" collection with {name,email,desc,scadenza (an ISODate),campo1,campo2,..campo-n} -> all the values of campo-i are the same fieldname of nomecampo-i and email is equal to emailproj
+*In profile page of user with emailproj will appear (underneath 'Matching') the result of n-task n-agents algorithm
 
 # Future releases
 
